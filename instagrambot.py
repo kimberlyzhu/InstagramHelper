@@ -1,14 +1,18 @@
 from selenium import webdriver 
 import time 
 
-print("enter username") 
-username = input() 
+username = "kimberlypzhu"
+if not username:
+	print("enter username") 
+	username = input() 
 
 print("enter password") 
 password = input() 
 
-print("enter the url") 
-url = input() 
+url = "https://www.instagram.com/"
+if not url:
+	print("enter the url") 
+	url = input() 
 
 def path(): 
 	global chrome 
@@ -55,7 +59,17 @@ def login(username, your_password):
 	# finds the login button 
 	log_cl = chrome.find_element_by_class_name("L3NKy")	 
 	log_cl.click() # clicks the login button 
-	time.sleep(20) #to click away any notifications manually
+	time.sleep(10) #to click away any notifications manually
+
+	notNow = chrome.find_element_by_class_name("yWX7d") 
+	notNow.click()
+
+	time.sleep(10) #to click away any notifications manually
+
+	notNow = chrome.find_element_by_class_name("aOOlW") 
+	notNow.click()
+
+	
 
 def like_pic(): 
 	
@@ -73,16 +87,19 @@ def continue_liking():
 	    #divs = chrome.find_elements_by_class_name("_8-yf5") 
 	    #divs = chrome.find_elements_by_css_selector("[aria-label=Like]")
 	    #divs = chrome.find_element_by_xpath("//div[@aria-label='Like']/div[@class='_8-yf']");
-	    list1 = chrome.find_elements_by_css_selector("[aria-label=Like]")
-	    list2 = chrome.find_elements_by_class_name("_8-yf5") 
-	    divs = intersection(list1, list2)
+	    # list1 = chrome.find_elements_by_css_selector("[aria-label=Like]")
+	    # list2 = chrome.find_elements_by_class_name("_8-yf5") 
+	    # divs = intersection(list1, list2)
+	    print("start " + str(index))
+	    divs = chrome.find_elements_by_xpath("//span[@class='fr66n']/button")
 
 	    try: 
-	    	divs[index].click()
+	    	divs[0].click()
 	    	time.sleep(2)
-	    	print("liked" + str(index))
+	    	print("liked: " + str(index))
 	    except IndexError:
-	        break
+	    	print("error")
+	    	break
 	    index += 1
 
 
